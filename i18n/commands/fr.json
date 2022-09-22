@@ -1,0 +1,53 @@
+{
+	"!INFO!": "Le masculin est utilisé ici à titre épicène",
+	"start": {
+		"name": "lancer",
+		"description": "Lance une nouvelle partie de mosus"
+	},
+	"set-role": {
+		"name": "def-role",
+		"description": "Définit le rôle des joueurs de mosus",
+		"options": {
+			"role": {
+				"label": "role",
+				"description": "Rôle requis pour jouer à mosus"
+			}
+		}
+	},
+	"set-language": {
+		"name": "def-langue",
+		"description": "Définit la langue utilisée dans ce serveur",
+		"options": {
+			"language": {
+				"label": "langue",
+				"description": "Langue désirée"
+			}
+		}
+	},
+	"open-votes": {
+		"name": "ouvrir-votes",
+		"description": "Ouvre la phase de votes"
+	},
+	"vote": {
+		"name": "voter",
+		"description": "Envoie ton vote contre un autre joueur",
+		"options": {
+			"sus": {
+				"label": "sus",
+				"description": "Le joueur que tu trouves sus"
+			},
+			"word": {
+				"label": "mot",
+				"description": "Le mot que tu trouves sus"
+			}
+		}
+	},
+	"cancel": {
+		"name": "annuler",
+		"description": "Annule la partie en cours"
+	},
+	"scoreboard": {
+		"name": "scores",
+		"description": "Affiche le tableau des scores du serveur"
+	}
+}

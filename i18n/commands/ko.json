@@ -1,0 +1,52 @@
+{
+	"start": {
+		"name": "시작",
+		"description": "새로운 게임 시작하기"
+	},
+	"set-role": {
+		"name": "역할",
+		"description": "mosus 역할을 맞추기",
+		"options": {
+			"role": {
+				"label": "역할",
+				"description": "mosus를 놀기 위한할역할"
+			}
+		}
+	},
+	"set-language": {
+		"name": "언어",
+		"description": "이 서버에서 발표의 언어를 맞추기",
+		"options": {
+			"language": {
+				"label": "언어",
+				"description": "원하는 언어"
+			}
+		}
+	},
+	"open-votes": {
+		"name": "투표-시작",
+		"description": "투표 단계를 시작하기"
+	},
+	"vote": {
+		"name": "투표",
+		"description": "sus님에게 투표하기",
+		"options": {
+			"sus": {
+				"label": "sus님",
+				"description": "본인이 생각하는 sus님인 사람"
+			},
+			"word": {
+				"label": "단어",
+				"description": "sus님이 보내야 하는 단어"
+			}
+		}
+	},
+	"cancel": {
+		"name": "취소",
+		"description": "놀고 있는 게임을 취소하기"
+	},
+	"scoreboard": {
+		"name": "스코어보드",
+		"description": "이 서버의 스코버이드를 보기"
+	}
+}

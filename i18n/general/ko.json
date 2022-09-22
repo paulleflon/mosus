@@ -1,0 +1,46 @@
+{
+	"dm": {
+		"notSus": "본인은 sus님이 **아닙니다**!",	
+		"sus": "본인은 sus**입니다**!\n`{word}`를 보내야 됩니다.",	
+		"placed": "잘 보냈습니다.",
+		"cancelled": "Something went wrong and the game is cancelled! Please ignore what I just sent you.",
+		"placeDuringVote": "The voting phase has been opened but you haven't placed your word yet!!\nYou will be suffering from the **malus**!.\n**If you don't place it at all, you will receive -8 points and everybody else will get +1!**"
+	},
+	"announcements": {
+		"gameLaunch": "{mention} **게임 #{id}가 시작되었습니다!**",
+		"voteOpen": "{mention} **투표 단계가 시작되었습니다.**",
+		"voted": "{mention}가 **투표하셨습니다.** ({voteCount}/{playerCount})",
+		"voteEnd": "{mention} **투표 단계가 끝났습니다.",
+		"reveal": {
+			"normal": "**sus님이 {sus}님이였습니다!**\n`{word}`(을)를 보내야 하였습니다. 거기에서 하셨습니다: {link}",
+			"malus": "**sus님이 {sus}님이였습니다!**\n`{word}`(을)를 보내야 하였습니다. **투표 단계 동안 했기 떼문에 벌칙을 받을 겁니다!**: {link}",
+			"notPlaced": "**sus님이 {sus}님이였습니다!**\n`{word}`(을)를 보내야 하였지만 **보내지 않았습니다!**. 여러분 ({sus} 아니라) **+1**를 즐기세요!"
+		},
+		"pointsEarned": "{mention}님이 **{amount}**점을 받습니다.",
+		"gameCancelled": "{mention} 게임이 취소되었습니다."
+	},
+	"ephemeral": {
+		"missingPermission": "`메시지 관리` 권한을 필요하십니다.",
+		"gameLaunch": "게임은 시작되었습니다. 본인이 진행자십니다.",
+		"roleSet": "지금으로부터 {role} 역할이 있는 맴버들은 mosus를 프레이할 수 있습니다.",
+		"langSet": "지금으로부터 이 서버에서 **한국어**로 말할 겁니다.\n\n*안녕하세요! 저는 mosus의 개발자예요. 한국어를 배운 게 제 취미이지만 전 아직도 초보자이예요 😅 그레서 실수 찾으면 제게 알려주세요! mosus를 사용해서 감사합니다!!*",
+		"voteRegistered": "본인의 투표를 보내졌습니다.",
+		"alreadyInGame": "게임이 이미 진행 중입니다.",
+		"aldreadyVoted": "{voted}에게 이미 투표하셨습니다.",
+		"notInVote": "아직 투표할 수 없습니다.",
+		"alreadyInVote": "투표 단계가 이미 시작되었습니다.",
+		"notInGame": "진행 중인 게임이 없습니다.",
+		"notPlayer": "본인은 플레이어가 아닙니다.",
+		"notHost": "진행자님만 그것을 할 수 있습니다.",
+		"missingRole": "mosus 열학 만들고 `/set-role`을 사용하여주세요.",
+		"deletedRole": "mosus 역할이 삭제된 것 같습니다. 다시금 역할을 만들고 `/set-role`을 사용하여주세요.",
+		"notEnoughPlayers": "블레이어가 부족합니다. 적어도 멤버 **3**명에게 {role} 열학을 주세요.",
+		"tooManyPlayers": "플레이어가 너무 많습니다. 최대 15명까지 플레이할 수 있습니다.",
+		"dmError": "**{tag}에게** DM을 보내기 못했습니다. 이 문제를 해결하시고 다시금 하여봐주세요.",
+		"noScores": "아직 아무도 점수를 받았지 않습니다."
+	},
+	"scoreboard": {
+		"title": "스코어보드",
+		"row": "**{rank}.** {user} - **{points}**점"
+	}
+}

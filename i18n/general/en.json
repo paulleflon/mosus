@@ -1,0 +1,46 @@
+{
+	"dm": {
+		"notSus": "You are **not** placing today! Good luck finding the sus...",
+		"sus": "You **have to place the word `{word}`**! Good luck, don't be too sus...",
+		"placed": "Well done... Did someone catch it? I hope not!",
+		"cancelled": "Something went wrong and the game was  cancelled! Please ignore what I just sent you.",
+		"placeDuringVote": "The voting phase has been opened but you haven't placed your word yet!!\nYou will be suffering from a **penalty**!.\n**If you don't place it at all, you will get -8 points and everybody else will earn +1!**"
+	},
+	"announcements": {
+		"gameLaunch": "{mention} **GAME `#{id}` HAS STARTED!**\nGood luck to y'all...",
+		"voteOpen": "{mention} **VOTES ARE OPEN** Was the sus discreet?",
+		"voted": "{mention} **has voted!** ({voteCount}/{playerCount})",
+		"voteEnd": "{mention} **VOTING PHASE HAS ENDED!** let's reveal the results...",
+		"reveal": {
+			"normal": "**AND THE SUS WAS...** {sus}!\nThey had to place `{word}`, which they placed here: {link}",
+			"malus": "**AND THE SUS WAS...** {sus}!\nThey had to place `{word}`, which they placed **during the voting phase!**: {link}\nEnjoy your penalty, {sus}!",
+			"notPlaced": "**AND THE SUS WAS...** {sus}\nThey had to place `{word}` **BUT THEY DIDN'T!**\nShall everybody (not you, {sus}) enjoy their point!"
+		},
+		"pointsEarned": "{mention} earns **{amount}** points.",
+		"gameCancelled": "{mention} the game has been cancelled!"
+	},
+	"ephemeral": {
+		"missingPermission": "You need the `Manage Messages` permission to do this.",
+		"gameLaunch": "The game has been sucessfully started, you are the host. Good luck!",
+		"roleSet": "Done. Server members with role {role} can now play mosus!",
+		"langSet": "The language has successfully been changed! I will now speak **English** in this server.",
+		"voteRegistered": "Your vote has been registered!",
+		"alreadyInGame": "A game has already started",
+		"alreadyVoted": "You've already voted for {voted}. Can't change it now!",
+		"notInVote": "The voting phase is not open yet.",
+		"alreadyInVote": "Votes are already open.",
+		"notInGame": "There is currently no game in progress.",
+		"notPlayer": "Sorry you are not allowed to play ^^'",
+		"notHost": "Sorry, only the host can do this.",
+		"missingRole": "You need to set a mosus role with `/set-role` first!",
+		"deletedRole": "It seems that the mosus role has been deleted. Please set a new one with `/set-role`!",
+		"notEnoughPlayers": "There aren't enough players! Please give the {role} role to at least **3** members.",
+		"tooManyPlayers": "There are too many players! A maximum of **15** members can play.",
+		"dmError": "I couldn't send a DM to **{tag}**. Fix this issue and try again!",
+		"noScores": "No one has ever earned any point in this server so far."
+	},
+	"scoreboard": {
+		"title": "Scoreboard",
+		"row": "**{rank}.** {user} - **{points}** points"
+	}
+}

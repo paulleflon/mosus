@@ -1,0 +1,52 @@
+{
+	"start": {
+		"name": "start",
+		"description": "Starts a new mosus game"
+	},
+	"set-role": {
+		"name": "set-role",
+		"description": "Sets the role of mosus players",
+		"options": {
+			"role": {
+				"label": "role",
+				"description": "Required role to play mosus"
+			}
+		}
+	},
+	"set-language": {
+		"name": "set-language",
+		"description": "Sets the language used for announcements in this server",
+		"options": {
+			"language": {
+				"label": "language",
+				"description": "Desired language"
+			}
+		}
+	},
+	"open-votes": {
+		"name": "open-votes",
+		"description": "Opens the voting phase"
+	},
+	"vote": {
+		"name": "vote",
+		"description": "Sends your vote against who you think is sus",
+		"options": {
+			"sus": {
+				"label": "sus",
+				"description": "The user you find sus"
+			},
+			"word": {
+				"label": "word",
+				"description": "The word you think they had to place"
+			}
+		}
+	},
+	"cancel": {
+		"name": "cancel",
+		"description": "Cancels the game"
+	},
+	"scoreboard": {
+		"name": "scoreboard",
+		"description": "Displays the scoreboard for this server"
+	}
+}
