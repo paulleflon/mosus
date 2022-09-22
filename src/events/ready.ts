@@ -12,7 +12,7 @@ export default class extends Event {
 		this.client.user!.setPresence({
 			activities: [
 				{
-					name: 'ratio',
+					name: 'https://rgbdle.hicka.world',
 					type: ActivityType.Playing
 				}
 			]
