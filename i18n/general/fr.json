@@ -2,29 +2,29 @@
 	"!INFO!": "Le masculin est utilisé ici à titre épicène.",
 	"dm": {
 		"notSus": "C'est **pas toi** qui place ! Bonne chance pour démasquer le sus...",
-		"sus": "**Tu dois placer `{word}` ! Bon courage, sois pas trop sus...",
+		"sus": "**Tu dois placer `{word}` !** Bon courage, sois pas trop sus...",
 		"placed": "Tu as bien placé ton mot, j'espère que personne ne l'a grillé...",
 		"cancelled": "Un problème est survenu et la partie est annulée. Tu peux ignorer ce que je viens d'envoyer !",
 		"placeDuringVote": "La phase de vote a été ouverte mais tu n'as pas encore placé ton mot !\nTu vas donc écoper du **malus** !\nSi tu ne le places pas avant la fin des votes, tu recevras **-8** tandis que tous les autres joueurs se réjouirons d'un **+1** gratuit !"
 	},
 	"announcements": {
 		"gameLaunch": "{mention} **LA PARTIE `#{id}` A DÉMARRÉ!**\nBonne chance à tous...",
-		"voteOpen": "{mention} **LES VOTES SONT OUVERTS!** Le sus a-t-il été discret ?",
-		"voted": "{mention} **a voté!** ({voteCount}/{playerCount})",
+		"voteOpen": "{mention} **LES VOTES SONT OUVERTS !** Le sus a-t-il été discret ?",
+		"voted": "{mention} **a voté !** ({voteCount}/{playerCount})",
 		"voteEnd": "{mention} **TOUT LE MONDE A VOTÉ !** Voyons ce qu'il en est...",
 		"reveal": {
 			"normal": "**ET LE SUS ÉTAIT...** {sus} !\nQui devait placer `{word}`, et qui l'a fait juste ici : {link}",
 			"malus": "**ET LE SUS ÉTAIT...** {sus} !\nQui devait placer `{word}`, et qui l'a fait **pendant la phase de votes !**: {link}\nProfite bien de ton malus, {sus} !",
-			"notPlaced": "**ET LE SUS ÉTAIT...** {sus} !\nQui devait placer `{word}` **MAIS NE L'A PAS FAIT!**\nProfitez bien de votre point, tout le monde ! (pas toi {sus})"
+			"notPlaced": "**ET LE SUS ÉTAIT...** {sus} !\nQui devait placer `{word}` **MAIS NE L'A PAS FAIT !**\nProfitez bien de votre point, tout le monde ! (pas toi {sus})"
 		},
 		"pointsEarned": "{mention} remporte **{amount}** points.",
 		"gameCancelled": "{mention} la partie a été annulée !"
 	},
 	"ephemeral": {
-		"missingPermission": "Il te faut la permission `Gére les messages` pour faire ça.",
-		"gameLaunch": "La partie a bien été démarrée, tu en est l'hôte. Bonne chance !",
+		"missingPermission": "Il te faut la permission `Gérer les messages` pour faire ça.",
+		"gameLaunch": "La partie a bien été démarrée, tu en es l'hôte. Bonne chance !",
 		"roleSet": "C'est bon ! Les membres ayant le rôle {role} peuvent maintenant jouer à mosus !",
-		"langSet": "La langue a bien été changée ! Je parlerai maintennant **Français** sur ce serveur !",
+		"langSet": "La langue a bien été changée ! Je parlerai maintennant en **Français** sur ce serveur !",
 		"voteRegistered": "Ton vote a bien été enregistré.",
 		"alreadyInGame": "Une partie est déjà en cours.",
 		"alreadyVoted": "Tu as déjà voté contre {voted} ! Ta sentence est irrévocable.",
