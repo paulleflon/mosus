@@ -129,7 +129,7 @@ export default class Database implements DatabaseParams {
 	 */
 	async createGame(game: Omit<SavedGame, 'id' | 'status'>): Promise<SavedGame> {
 		const [result] = await this.#connection.query(
-			'INSERT INTO GAMES (guild, host, channel, sus, word) VALUES (?, ?, ?, ?, ?)',
+			'INSERT INTO Games (guild, host, channel, sus, word) VALUES (?, ?, ?, ?, ?)',
 			[game.guild, game.host, game.channel, game.sus, game.word]
 		) as any[];
 		const id = result.insertId;
