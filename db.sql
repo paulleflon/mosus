@@ -45,8 +45,8 @@ CREATE TABLE `Votes`(
 	`voted` VARCHAR(20) NOT NULL,
 	/* The word that the voter thinks the voted had to place */
 	`word` VARCHAR(100),
-    PRIMARY KEY (`id`, `voter`),
-	FOREIGN KEY (`id`) REFERENCES `Games`(`id`)
+    PRIMARY KEY (`game`, `voter`),
+	FOREIGN KEY (`game`) REFERENCES `Games`(`id`)
 );
 
 CREATE TABLE `Scores`(
