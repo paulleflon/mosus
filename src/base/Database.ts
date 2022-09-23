@@ -57,9 +57,29 @@ export default class Database implements DatabaseParams {
 			database: this.database,
 			host: this.host,
 			password: this.password,
-			user: this.user
+			user: this.user,
+			waitForConnections: true
 		});
+		this.#connection.resume
 		this.log.info('Sucessfully connected to Database');
+	}
+
+	/**
+	 * Makes a query to the database making sure the connection is not closed.
+	 * @param sql The sql query string.
+	 * @param values The values to safely put into the sql query string.
+	 * @returns The result of the SQL query.
+	 */
+	async query(sql: string, values: any[]): Promise<any[]> {
+		try {
+			return await this.#connection.query(sql, values);
+		} catch (err) {
+			// This error may be thrown because the connection is in closed state.
+			// Therefore, we can retry to send the query after reconnecting to the database.
+			// If it still fails for whatever reason then the error is thrown as usual.
+			await this.connect();
+			return this.#connection.query(sql, values);
+		}
 	}
 
 	//#region GUILDS OPERATIONS
@@ -68,7 +88,7 @@ export default class Database implements DatabaseParams {
 	 * @param id The id of the guild.
 	 */
 	async addGuild(id: Snowflake): Promise<void> {
-		this.#connection.query('INSERT INTO Guilds (id) VALUES (?)', [id]);
+		this.query('INSERT INTO Guilds (id) VALUES (?)', [id]);
 		this.log.info('Added Guild', id);
 		this.#guildCache.set(id, { id, language: 'en' });
 	}
@@ -78,7 +98,7 @@ export default class Database implements DatabaseParams {
 	 * @param role The id of the role.
 	 */
 	async setGuildRole(guild: Snowflake, role: Snowflake) {
-		this.#connection.query('UPDATE Guilds SET role = ? WHERE id = ?', [role, guild]);
+		this.query('UPDATE Guilds SET role = ? WHERE id = ?', [role, guild]);
 		this.log.info(`G${guild} - Set role to`, role);
 		if (this.#guildCache.has(guild))
 			this.#guildCache.get(guild)!.role = role;
@@ -89,7 +109,7 @@ export default class Database implements DatabaseParams {
 	 * @param language The ISO 639-1 string of the selected language.
 	 */
 	async setGuildLang(guild: Snowflake, language: AvailableLanguage) {
-		this.#connection.query('UPDATE Guilds SET language = ? WHERE id = ?', [language, guild]);
+		this.query('UPDATE Guilds SET language = ? WHERE id = ?', [language, guild]);
 		this.log.info(`G${guild} - Set lang to`, language);
 		if (this.#guildCache.has(guild))
 			this.#guildCache.get(guild)!.language = language;
@@ -100,7 +120,7 @@ export default class Database implements DatabaseParams {
 	 * @param game The id of the game, or null if the ongoing game in the guild is finished.
 	 */
 	async setGuildGame(guild: Snowflake, game: number | null) {
-		this.#connection.query('UPDATE Guilds SET game = ? WHERE id = ?', [game, guild]);
+		this.query('UPDATE Guilds SET game = ? WHERE id = ?', [game, guild]);
 		this.log.info(`G${guild} - Set game to`, game);
 		if (this.#guildCache.has(guild))
 			this.#guildCache.get(guild)!.game = game || undefined;
@@ -113,7 +133,7 @@ export default class Database implements DatabaseParams {
 	async getGuild(id: Snowflake): Promise<SavedGuild | null> {
 		if (this.#guildCache.has(id))
 			return this.#guildCache.get(id)!;
-		const [rows] = await this.#connection.query('SELECT * FROM Guilds WHERE id = ?', [id]) as any[];
+		const [rows] = await this.query('SELECT * FROM Guilds WHERE id = ?', [id]) as any[];
 		if (!rows.length)
 			return null;
 		const guild = rows[0] as SavedGuild;
@@ -128,7 +148,7 @@ export default class Database implements DatabaseParams {
 	 * @returns The created game, including its freshly assigned id.
 	 */
 	async createGame(game: Omit<SavedGame, 'id' | 'status'>): Promise<SavedGame> {
-		const [result] = await this.#connection.query(
+		const [result] = await this.query(
 			'INSERT INTO Games (guild, host, channel, sus, word) VALUES (?, ?, ?, ?, ?)',
 			[game.guild, game.host, game.channel, game.sus, game.word]
 		) as any[];
@@ -147,7 +167,7 @@ export default class Database implements DatabaseParams {
 	async getGame(id: number): Promise<SavedGame | null> {
 		if (this.#gameCache.has(id))
 			return this.#gameCache.get(id)!;
-		const [rows] = await this.#connection.query('SELECT * FROM Games WHERE id = ?', [id]) as any[];
+		const [rows] = await this.query('SELECT * FROM Games WHERE id = ?', [id]) as any[];
 		if (!rows.length)
 			return null;
 		const game = rows[0] as SavedGame;
@@ -160,7 +180,7 @@ export default class Database implements DatabaseParams {
 	 * @param link The link to the message in which the word was placed.
 	 */
 	async setGameLink(id: number, link: string): Promise<void> {
-		await this.#connection.query('UPDATE Games SET link = ? WHERE id = ?', [link, id]);
+		await this.query('UPDATE Games SET link = ? WHERE id = ?', [link, id]);
 		this.log.info(`#${id} - Set link to`, link);
 		if (this.#gameCache.has(id))
 			this.#gameCache.get(id)!.link = link;
@@ -175,7 +195,7 @@ export default class Database implements DatabaseParams {
 	 * status to `playing`.
 	 */
 	async setGameStatus(id: number, status: 'voting' | 'ended' | 'cancelled'): Promise<void> {
-		await this.#connection.query('UPDATE Games SET status = ? WHERE id = ?', [status, id]);
+		await this.query('UPDATE Games SET status = ? WHERE id = ?', [status, id]);
 		this.log.info(`#${id} - Set status to`, status);
 		if (this.#gameCache.has(id))
 			this.#gameCache.get(id)!.status = status;
@@ -185,7 +205,7 @@ export default class Database implements DatabaseParams {
 	 * @param id The id of the game. 
 	 */
 	async enableMalus(id: number): Promise<void> {
-		await this.#connection.query('UPDATE Games SET malus = 1 WHERE id = ?', [id]);
+		await this.query('UPDATE Games SET malus = 1 WHERE id = ?', [id]);
 		this.log.info(`#${id} - Malus enabled`);
 		if (this.#gameCache.has(id))
 			this.#gameCache.get(id)!.malus = true;
@@ -202,7 +222,7 @@ export default class Database implements DatabaseParams {
 	async getVotes(game: number): Promise<GameVotes> {
 		if (this.#votesCache.has(game))
 			return this.#votesCache.get(game)!;
-		const [rows] = await this.#connection.query('SELECT * FROM Votes WHERE game = ?', [game]) as any[];
+		const [rows] = await this.query('SELECT * FROM Votes WHERE game = ?', [game]) as any[];
 		const votes: GameVotes = {};
 		for (const row of rows) {
 			votes[row.voter] = row;
@@ -215,7 +235,7 @@ export default class Database implements DatabaseParams {
 	 * @param vote The vote to submit.
 	 */
 	async setVote(vote: SavedVote): Promise<void> {
-		await this.#connection.query('INSERT INTO Votes VALUES (?, ?, ?, ?)', [vote.game, vote.voter, vote.voted, vote.word || null]);
+		await this.query('INSERT INTO Votes VALUES (?, ?, ?, ?)', [vote.game, vote.voter, vote.voted, vote.word || null]);
 		this.log.info(`#${vote.game} - New vote:`, vote.voter, '->', vote.voted, vote.word ? `('${vote.word}')` : '');
 		if (this.#votesCache.has(vote.game))
 			this.#votesCache.get(vote.game)![vote.voter] = vote;
@@ -230,7 +250,7 @@ export default class Database implements DatabaseParams {
 	async getScores(guild: Snowflake): Promise<Record<Snowflake, number>> {
 		if (this.#scoresCache.has(guild))
 			return this.#scoresCache.get(guild)!;
-		const [rows] = await this.#connection.query('SELECT * FROM Scores WHERE guild = ?', [guild]) as any[];
+		const [rows] = await this.query('SELECT * FROM Scores WHERE guild = ?', [guild]) as any[];
 		const scores: Record<Snowflake, number> = {};
 		for (const row of rows) {
 			scores[row.user] = row.score;
@@ -246,10 +266,10 @@ export default class Database implements DatabaseParams {
 	 */
 	async setScore(guild: Snowflake, user: Snowflake, score: number): Promise<void> {
 		try {
-			await this.#connection.query('INSERT INTO Scores VALUES (?, ?, ?)', [guild, user, score]);
+			await this.query('INSERT INTO Scores VALUES (?, ?, ?)', [guild, user, score]);
 			// This throws an error if the user's score in the guild is already set.
 		} catch (_) {
-			await this.#connection.query('UPDATE Scores SET score = ? WHERE guild = ? AND user = ?', [score, guild, user]);
+			await this.query('UPDATE Scores SET score = ? WHERE guild = ? AND user = ?', [score, guild, user]);
 		}
 		this.log.info('New score for', user, 'in', guild, '->', score);
 		if (this.#scoresCache.has(guild))
@@ -262,7 +282,7 @@ export default class Database implements DatabaseParams {
 	 * @param points The number of points to add. Can be any integer, positive and negative.
 	 */
 	async incrementScore(guild: Snowflake, user: Snowflake, points: number): Promise<void> {
-		const [rows] = await this.#connection.query('SELECT score FROM Scores WHERE guild = ? AND user = ?', [guild, user]) as any[];
+		const [rows] = await this.query('SELECT score FROM Scores WHERE guild = ? AND user = ?', [guild, user]) as any[];
 		let score = rows[0] ? rows[0].score : 0;
 		score += points;
 		await this.setScore(guild, user, score);
