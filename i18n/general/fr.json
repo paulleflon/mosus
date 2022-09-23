@@ -35,7 +35,7 @@
 		"notHost": "Seul l'hôte peut effectuer cette action.",
 		"missingRole": "Il faut d'abord définir le rôle des joueurs de mosus avec `/def-role` !",
 		"deletedRole": "Il semblerait que le rôle mosus ait été supprimé. Redéfinissez-en un avec `/def-role` !",
-		"notEnoughPlayers": "Il n'y a pas assez de joueurs ! Attribuez le rôle {mosus} à au moins **3** membres.",
+		"notEnoughPlayers": "Il n'y a pas assez de joueurs ! Attribuez le rôle {role} à au moins **3** membres.",
 		"tooManyPlayers": "Il y a trop de joueurs ! Un maximum de **15** membres peuvent jouer à mosus.",
 		"dmError": "Je n'ai pas pu envoyer de Message Privé à **{tag}**. Réglez ce problème et réessayez !",
 		"noScores": "Personne n'a encore marqué de point dans ce serveur."
