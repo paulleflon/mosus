@@ -1,14 +1,14 @@
 {
 	"!INFO!": "Le masculin est utilisé ici à titre épicène.",
 	"dm": {
-		"notSus": "C'est **pas toi** qui place ! Bonne chance pour démasquer le sus...",
+		"notSus": "C'est **pas toi** qui places ! Bonne chance pour démasquer le sus...",
 		"sus": "**Tu dois placer `{word}` !** Bon courage, sois pas trop sus...",
 		"placed": "Tu as bien placé ton mot, j'espère que personne ne l'a grillé...",
 		"cancelled": "Un problème est survenu et la partie est annulée. Tu peux ignorer ce que je viens d'envoyer !",
-		"placeDuringVote": "La phase de vote a été ouverte mais tu n'as pas encore placé ton mot !\nTu vas donc écoper du **malus** !\nSi tu ne le places pas avant la fin des votes, tu recevras **-8** tandis que tous les autres joueurs se réjouirons d'un **+1** gratuit !"
+		"placeDuringVote": "La phase de vote a été ouverte mais tu n'as pas encore placé ton mot !\nTu vas donc écoper du **malus** !\nSi tu ne le places pas avant la fin des votes, tu recevras **-8** tandis que tous les autres joueurs se réjouiront d'un **+1** gratuit !"
 	},
 	"announcements": {
-		"gameLaunch": "{mention} **LA PARTIE `#{id}` A DÉMARRÉ!**\nBonne chance à tous...",
+		"gameLaunch": "{mention} **LA PARTIE `#{id}` A DÉMARRÉ !**\nBonne chance à tous...",
 		"voteOpen": "{mention} **LES VOTES SONT OUVERTS !** Le sus a-t-il été discret ?",
 		"voted": "{mention} **a voté !** ({voteCount}/{playerCount})",
 		"voteEnd": "{mention} **TOUT LE MONDE A VOTÉ !** Voyons ce qu'il en est...",
@@ -24,7 +24,7 @@
 		"missingPermission": "Il te faut la permission `Gérer les messages` pour faire ça.",
 		"gameLaunch": "La partie a bien été démarrée, tu en es l'hôte. Bonne chance !",
 		"roleSet": "C'est bon ! Les membres ayant le rôle {role} peuvent maintenant jouer à mosus !",
-		"langSet": "La langue a bien été changée ! Je parlerai maintennant en **Français** sur ce serveur !",
+		"langSet": "La langue a bien été changée ! Je parlerai maintenant en **Français** sur ce serveur !",
 		"voteRegistered": "Ton vote a bien été enregistré.",
 		"alreadyInGame": "Une partie est déjà en cours.",
 		"alreadyVoted": "Tu as déjà voté contre {voted} ! Ta sentence est irrévocable.",
@@ -33,9 +33,9 @@
 		"notInGame": "Aucune partie n'est actuellement en cours.",
 		"notPlayer": "Déso tu joues pas toi ^^",
 		"notHost": "Seul l'hôte peut effectuer cette action.",
-		"missingRole": "Il faut déjà définir le rôle des joueurs de mosus avec `/def-role` !",
+		"missingRole": "Il faut d'abord définir le rôle des joueurs de mosus avec `/def-role` !",
 		"deletedRole": "Il semblerait que le rôle mosus ait été supprimé. Redéfinissez-en un avec `/def-role` !",
-		"notEnoughPlayers": "Il n'y a pas assez de joueurs ! Attribuez le rôle {mosus} a au moins **3** membres.",
+		"notEnoughPlayers": "Il n'y a pas assez de joueurs ! Attribuez le rôle {role} à au moins **3** membres.",
 		"tooManyPlayers": "Il y a trop de joueurs ! Un maximum de **15** membres peuvent jouer à mosus.",
 		"dmError": "Je n'ai pas pu envoyer de Message Privé à **{tag}**. Réglez ce problème et réessayez !",
 		"noScores": "Personne n'a encore marqué de point dans ce serveur."
