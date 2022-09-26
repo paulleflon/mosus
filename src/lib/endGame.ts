@@ -16,13 +16,11 @@ function getSusScore(w: number, l: number): number {
 		// Avoids division by 0 when calculating sign.
 		return 0;
 
-	// This is -1 if there are more players who caught the sus, or 1 in the opposite case
-	const sign = (l - w) / Math.abs(l - w);
-	// This represents how well/bad the sus played
-	const ratio = Math.max(w, l) / (w + l);
-	// The maximum amount of points the sus can earn/lose
 	const maxValue = 5;
-	return Math.round(sign * ratio * maxValue);
+	// This represents the winrate of the sus
+	const ratio = l/(l+w);
+	// Returns a value between -maxValue and +maxValue based on the winrate percentage
+	return Math.round((maxValue*2)*ratio)-maxValue;
 }
 
 /**
