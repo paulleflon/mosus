@@ -13,13 +13,11 @@ import { formatMessage } from './i18n';
  */
 function getSusScore(w: number, l: number): number {
 	if (w === l)
-		// Avoids division by 0 when calculating sign.
 		return 0;
-
 	const maxValue = 5;
 	// This represents the winrate of the sus
 	const ratio = l/(l+w);
-	// Returns a value between -maxValue and +maxValue based on the winrate percentage
+	// Returns a value between -maxValue and +maxValue based on the winrate quotient
 	return Math.round((maxValue*2)*ratio)-maxValue;
 }
 
