@@ -48,5 +48,15 @@
 	"scoreboard": {
 		"name": "스코어보드",
 		"description": "이 서버의 스코버이드를 보기"
+	},
+	"game": {
+		"name": "partie",
+		"description": "Bilan d'une partie passée dans ce serveur",
+		"options": {
+			"game": {
+				"label": "partie",
+				"description": "L'id de la partie"
+			}
+		}
 	}
 }

@@ -48,5 +48,15 @@
 	"scoreboard": {
 		"name": "scoreboard",
 		"description": "Displays the scoreboard for this server"
+	},
+	"game": {
+		"name": "game",
+		"description": "Summary of a passed game in the server",
+		"options": {
+			"game": {
+				"label": "game",
+				"description": "id of the game"
+			}
+		}
 	}
 }

@@ -37,7 +37,10 @@
 		"notEnoughPlayers": "There aren't enough players! Please give the {role} role to at least **3** members.",
 		"tooManyPlayers": "There are too many players! A maximum of **15** members can play.",
 		"dmError": "I couldn't send a DM to **{tag}**. Fix this issue and try again!",
-		"noScores": "No one has ever earned any point in this server so far."
+		"noScores": "No one has ever earned any point in this server so far.",
+		"unknownGame": "This game was not found.",
+		"forbiddenGame": "You can't access data about this game.",
+		"gameNotFinished": "This game has not finished yet."
 	},
 	"scoreboard": {
 		"title": "Scoreboard",
