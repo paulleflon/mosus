@@ -17,6 +17,8 @@ export function formatMessage(id: string, locale: LocaleString | 'en', values: R
 	try {
 		obj = require(`../../i18n/general/${locale}.json`);
 	} catch (_) {
+		// We don't replace this error by a fallback
+		// This error should really never happen in production.
 		throw new Error(`Locale not found: ${locale}`);
 	}
 	// The provided `id` is split by `.`, to search through nested i18n strings.
@@ -29,12 +31,19 @@ export function formatMessage(id: string, locale: LocaleString | 'en', values: R
 	// At the end of the loop, it must be a string. 
 	for (const key of path) {
 		template = template[key];
-		if (!template)
-			throw new Error(`Unknown i18n id: '${id}'`);
+		if (!template) {
+			// If it fails when formatiing in english there is no fallback available.
+			// So to avoid a crash we just return the provided string id.
+			// If it fails in another language we can try to return the english version instead.
+			if (locale === 'en')
+				return id;
+			else
+				return formatMessage(id, 'en', values);
+
+		}
 	}
 	if (typeof template !== 'string')
-		throw new Error(`Incorrect i18n id: '${id}', this seems to be a locale scope and not a locale string.`);
-	// Matches any `{dynamicValueName}` pattern.
+		return id;
 	const regex = /({(\w+)})/g;
 	let match;
 	while (match = regex.exec(template)) {
@@ -72,9 +81,15 @@ export class LocalizedSlashCommandBuilder extends SlashCommandBuilder {
 		for (const language of AvailableLanguages) {
 			// English is the default language, this loop is only for the other languages.
 			if (language === 'en') continue;
-			const locale = require(`../../i18n/commands/${language}.json`)[name];
-			this.setNameLocalization(language, locale.name)
-				.setDescriptionLocalization(language, locale.description);
+			try {
+				const locale = require(`../../i18n/commands/${language}.json`)[name];
+				this.setNameLocalization(language, locale.name)
+					.setDescriptionLocalization(language, locale.description);
+			} catch (_) {
+				// Shit happened, we fallback to english.
+				this.setNameLocalization(language, en.name)
+					.setDescriptionLocalization(language, en.description);
+			}
 		}
 	}
 
@@ -89,9 +104,15 @@ export class LocalizedSlashCommandBuilder extends SlashCommandBuilder {
 		for (const language of AvailableLanguages) {
 			// English is the default language, this loop is only for the other languages.
 			if (language === 'en') continue;
-			const locale = require(`../../i18n/commands/${language}.json`)[this.name].options[name];
-			builder.setNameLocalization(language, locale.label)
-				.setDescriptionLocalization(language, locale.description);
+			try {
+				const locale = require(`../../i18n/commands/${language}.json`)[this.name].options[name];
+				builder.setNameLocalization(language, locale.label)
+					.setDescriptionLocalization(language, locale.description);
+			} catch (_) {
+				// Shit happened, we fallback to english.
+				builder.setNameLocalization(language, en.label)
+					.setNameLocalization(language, en.description);
+			}
 		}
 		switch (builder.type) {
 			case ApplicationCommandOptionType.Attachment:
