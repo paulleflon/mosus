@@ -72,9 +72,15 @@ export class LocalizedSlashCommandBuilder extends SlashCommandBuilder {
 		for (const language of AvailableLanguages) {
 			// English is the default language, this loop is only for the other languages.
 			if (language === 'en') continue;
-			const locale = require(`../../i18n/commands/${language}.json`)[name];
-			this.setNameLocalization(language, locale.name)
-				.setDescriptionLocalization(language, locale.description);
+			try {
+				const locale = require(`../../i18n/commands/${language}.json`)[name];
+				this.setNameLocalization(language, locale.name)
+					.setDescriptionLocalization(language, locale.description);
+			} catch (_) {
+				// Shit happened, we fallback to english.
+				this.setNameLocalization(language, en.name)
+					.setDescriptionLocalization(language, en.description);
+			}
 		}
 	}
 
@@ -89,9 +95,15 @@ export class LocalizedSlashCommandBuilder extends SlashCommandBuilder {
 		for (const language of AvailableLanguages) {
 			// English is the default language, this loop is only for the other languages.
 			if (language === 'en') continue;
-			const locale = require(`../../i18n/commands/${language}.json`)[this.name].options[name];
-			builder.setNameLocalization(language, locale.label)
-				.setDescriptionLocalization(language, locale.description);
+			try {
+				const locale = require(`../../i18n/commands/${language}.json`)[this.name].options[name];
+				builder.setNameLocalization(language, locale.label)
+					.setDescriptionLocalization(language, locale.description);
+			} catch (_) {
+				// Shit happened, we fallback to english.
+				builder.setNameLocalization(language, en.label)
+					.setNameLocalization(language, en.description);
+			}
 		}
 		switch (builder.type) {
 			case ApplicationCommandOptionType.Attachment:
