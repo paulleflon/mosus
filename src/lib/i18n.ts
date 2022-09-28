@@ -17,6 +17,8 @@ export function formatMessage(id: string, locale: LocaleString | 'en', values: R
 	try {
 		obj = require(`../../i18n/general/${locale}.json`);
 	} catch (_) {
+		// We don't replace this error by a fallback
+		// This error should really never happen in production.
 		throw new Error(`Locale not found: ${locale}`);
 	}
 	// The provided `id` is split by `.`, to search through nested i18n strings.
@@ -30,18 +32,18 @@ export function formatMessage(id: string, locale: LocaleString | 'en', values: R
 	for (const key of path) {
 		template = template[key];
 		if (!template) {
-			// If it fails in english there is nothing to do but throw an error.
+			// If it fails when formatiing in english there is no fallback available.
+			// So to avoid a crash we just return the provided string id.
 			// If it fails in another language we can try to return the english version instead.
 			if (locale === 'en')
-				throw new Error(`Unknown i18n id: '${id}'`);
+				return id;
 			else
 				return formatMessage(id, 'en', values);
 
 		}
 	}
 	if (typeof template !== 'string')
-		throw new Error(`Incorrect i18n id: '${id}', this seems to be a locale scope and not a locale string.`);
-	// Matches any `{dynamicValueName}` pattern.
+		return id;
 	const regex = /({(\w+)})/g;
 	let match;
 	while (match = regex.exec(template)) {
