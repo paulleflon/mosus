@@ -29,8 +29,15 @@ export function formatMessage(id: string, locale: LocaleString | 'en', values: R
 	// At the end of the loop, it must be a string. 
 	for (const key of path) {
 		template = template[key];
-		if (!template)
-			throw new Error(`Unknown i18n id: '${id}'`);
+		if (!template) {
+			// If it fails in english there is nothing to do but throw an error.
+			// If it fails in another language we can try to return the english version instead.
+			if (locale === 'en')
+				throw new Error(`Unknown i18n id: '${id}'`);
+			else
+				return formatMessage(id, 'en', values);
+
+		}
 	}
 	if (typeof template !== 'string')
 		throw new Error(`Incorrect i18n id: '${id}', this seems to be a locale scope and not a locale string.`);
