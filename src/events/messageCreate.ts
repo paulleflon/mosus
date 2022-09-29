@@ -23,7 +23,12 @@ export default class extends Event {
 		// So we can ignore any message that is not sent by them.
 		if (message.author.id !== game.sus)
 			return;
-		if (!game.link && message.content.toLocaleLowerCase().includes(game.word)) {
+		// Unfair fuckers scenarios
+		const msg = message.content.toLocaleLowerCase()
+			.replace(/https?:\/\/[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,10}[^\n ]+/g, '') // Avoid detecting the word in a link (especially in images alone that are embedded and do not show the links)
+			.replace(/(```)(.+)(\n[^]*```)/g, '$1$3') // Avoid detecting the word in the language declaration of a markdown code which is hidden
+			.replace(/<a?:\w+:\d{18,20}>/g, ''); // Avoid detecting the word in a custom emoji's name
+		if (!game.link && msg.includes(game.word)) {
 			await this.client.db.setGameLink(game.id, message.url);
 			this.log.info(message.author.id, `placed their word for game #${game.id}`);
 			message.author.send(formatMessage('dm.placed', save.language))
