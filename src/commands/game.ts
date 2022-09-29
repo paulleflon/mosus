@@ -51,7 +51,9 @@ export default class extends Command {
 			const displayWord = word ? `('${word}')` : '';
 			description += `<@${voter}> -> <@${voted}> ${displayWord} ${displayEarned}\n`;
 		}
-		const susEarned = getSusScore(w, l);
+		if (game.malus)
+			l = 0;
+		const susEarned = game.link ? getSusScore(w, l) : -8;
 		const displaySusEarned = (susEarned >= 0 ? '+' : '') + susEarned.toString();
 		// host and sus are fetched in order to get their avatars for the embed.
 		const host = await guild.members.fetch(game.host);
