@@ -44,8 +44,10 @@ export default class extends Command {
 		for (const [voter, { voted, word }] of Object.entries(votes)) {
 			// As the point earnings per game are not stored, we have to recalculate them when getting the embed.
 			// Thus, for the sus' earnings, we have to count again who caught them and who didn't for the getSusScore function.
-			if (voted === game.sus) w++;
-			else l++;
+			if (voter !== game.sus) {
+				if (voted === game.sus) w++;
+				else l++;
+			}
 			const earned = word && word.toLowerCase() === game.word ? 4 : voted === game.sus ? 2 : 0;
 			const displayEarned = voter === game.sus ? '**(sus)**' : `**+${earned}**`;
 			const displayWord = word ? `('${word}')` : '';
