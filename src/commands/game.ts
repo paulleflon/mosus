@@ -36,13 +36,14 @@ export default class extends Command {
 				content: formatMessage('ephemeral.gameNotFinished', interaction.locale),
 				ephemeral: true
 			});
+
 		const votes = await this.client.db.getVotes(game.id);
-		const host = await guild.members.fetch(game.host);
-		const sus = await guild.members.fetch(game.sus);
+		let description = '**Votes**\n';
 		let w = 0;
 		let l = 0;
-		let description = '**Votes**\n';
 		for (const [voter, { voted, word }] of Object.entries(votes)) {
+			// As the point earnings per game are not stored, we have to recalculate them when getting the embed.
+			// Thus, for the sus' earnings, we have to count again who caught them and who didn't for the getSusScore function.
 			if (voted === game.sus) w++;
 			else l++;
 			const earned = word && word.toLowerCase() === game.word ? 4 : voted === game.sus ? 2 : 0;
@@ -50,6 +51,11 @@ export default class extends Command {
 			const displayWord = word ? `('${word}')` : '';
 			description += `<@${voter}> -> <@${voted}> ${displayWord} ${displayEarned}\n`;
 		}
+		const susEarned = getSusScore(w, l);
+		const displaySusEarned = (susEarned >= 0 ? '+' : '') + susEarned.toString();
+		// host and sus are fetched in order to get their avatars for the embed.
+		const host = await guild.members.fetch(game.host);
+		const sus = await guild.members.fetch(game.sus);
 		const embed = new EmbedBuilder()
 			.setAuthor(host ? {
 				name: `Hosted by ${host.user.username}`,
@@ -61,7 +67,7 @@ export default class extends Command {
 			.addFields([
 				{
 					name: 'Sus',
-					value: `<@${game.sus}>`,
+					value: `<@${game.sus}> **${displaySusEarned}**`,
 					inline: true
 				},
 				{
@@ -74,7 +80,8 @@ export default class extends Command {
 					value: game.link ? `[here](${game.link})` : '*Nowhere*',
 					inline: true
 				}
-			]);
+			])
+			.setColor('#2F3136');
 		interaction.reply({
 			embeds: [embed]
 		});
