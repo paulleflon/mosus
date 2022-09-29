@@ -56,11 +56,15 @@ export default class extends Command {
 		const susEarned = game.link ? getSusScore(w, l) : -8;
 		const displaySusEarned = (susEarned >= 0 ? '+' : '') + susEarned.toString();
 		// host and sus are fetched in order to get their avatars for the embed.
-		const host = await guild.members.fetch(game.host);
-		const sus = await guild.members.fetch(game.sus);
+		let host;
+		let sus;
+		try {
+			host = await this.client.users.fetch(game.host);
+			sus = await this.client.users.fetch(game.sus);
+		} catch (_) { /* This is fine. */ }
 		const embed = new EmbedBuilder()
 			.setAuthor(host ? {
-				name: `Hosted by ${host.user.username}`,
+				name: `Hosted by ${host.username}`,
 				iconURL: host.displayAvatarURL()
 			} : null)
 			.setThumbnail(sus ? sus.displayAvatarURL() : null)
