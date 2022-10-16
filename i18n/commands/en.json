@@ -58,5 +58,15 @@
 				"description": "id of the game"
 			}
 		}
+	},
+	"games": {
+		"name": "games",
+		"description": "List of passed games in the server",
+		"options": {
+			"page": {
+				"label": "page",
+				"description": "The page of the list to see"
+			}
+		}
 	}
 }
