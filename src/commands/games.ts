@@ -17,20 +17,26 @@ export default class extends Command {
 	}
 
 	public async execute(interaction: ChatInputCommandInteraction): Promise<void> {
-		const page = interaction.options.getNumber('page', true);
+		let page = interaction.options.getNumber('page', false) || 1;
 		const guild = interaction.guild!;
 		const save = (await this.client.db.getGuild(guild.id))!;
-		const [[count]] = await this.client.db.query('SELECT COUNT(*) FROM Games WHERE guild = ?', [guild.id]) as any[];
+		const [[rows]] = await this.client.db.query('SELECT COUNT(*) FROM Games WHERE guild = ?', [guild.id]) as any[];
+		const count = rows['COUNT(*)'];
 		const pages = Math.ceil(count / 10);
-		const [games] = pages === 0 ? [] : await this.client.db.query('SELECT id, word FROM Games WHERE guild = ?', [guild.id]) as any[];
-		let description = pages === 0 ? formatMessage('games.embed.noGame', save.language) : '';
-		for (const [id, word] of games) {
-			description += formatMessage('games.embed.descriptionRow', save.language, { id, word });
+		if (page > pages)
+			page = 1;
+		const limit = `LIMIT ${(page - 1) * 10}, 10`;
+		const [games] = count === 0 ? [] : await this.client.db.query('SELECT id, word FROM Games WHERE guild = ? ORDER BY id ' + limit, [guild.id]) as any[];
+
+		let description = count === 0 ? formatMessage('games.embed.noGame', save.language) : '';
+		for (const { id, word } of games) {
+			description += formatMessage('games.embed.descriptionRow', save.language, { id, word }) + '\n';
 		}
 		const embed = new EmbedBuilder()
 			.setTitle(formatMessage('games.embed.title', save.language, { guild: guild.name }))
 			.setDescription(description)
-			.setFooter({ text: formatMessage('games.embed.footer', save.language, { count, page: page.toString() }) });
+			.setColor('#2F3136')
+			.setFooter({ text: formatMessage('games.embed.footer', save.language, { pages: pages.toString(), page: page.toString() }) });
 		interaction.reply({ embeds: [embed] });
 	}
 }

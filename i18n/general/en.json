@@ -45,5 +45,13 @@
 	"scoreboard": {
 		"title": "Scoreboard",
 		"row": "**{rank}.** {user} - **{points}** points"
+	},
+	"games": {
+		"embed": {
+			"descriptionRow": "**#{id}** - `{word}`",
+			"title": "Games in {guild}",
+			"footer": "Page {page}/{pages} • /game [id] for more details",
+			"noGame": "No game has been played in this server yet."
+		}
 	}
 }

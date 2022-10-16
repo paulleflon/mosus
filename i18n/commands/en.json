@@ -65,7 +65,7 @@
 		"options": {
 			"page": {
 				"label": "page",
-				"description": "The page of the list to see"
+				"description": "page"
 			}
 		}
 	}
