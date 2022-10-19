@@ -38,10 +38,21 @@
 		"notEnoughPlayers": "Il n'y a pas assez de joueurs ! Attribuez le rôle {role} à au moins **3** membres.",
 		"tooManyPlayers": "Il y a trop de joueurs ! Un maximum de **15** membres peuvent jouer à mosus.",
 		"dmError": "Je n'ai pas pu envoyer de Message Privé à **{tag}**. Réglez ce problème et réessayez !",
-		"noScores": "Personne n'a encore marqué de point dans ce serveur."
+		"noScores": "Personne n'a encore marqué de point dans ce serveur.",
+		"unknownGame": "Partie non trouvée.",
+		"forbiddenGame": "Vous n'avez pas accès aux informations de cette partie.",
+		"gameNotFinished": "Cette partie n'est pas encore terminée."
 	},
 	"scoreboard": {
 		"title": "Tableau des scores",
 		"row": "**{rank}.** {user} - **{points}** points"
+	},
+	"games": {
+		"embed": {
+			"descriptionRow": "**#{id}** - `{word}`",
+			"title": "Parties sur {guild}",
+			"footer": "Page {page}/{pages} • /partie [id] pour plus de détails",
+			"noGame": "Aucune partie n'a été "
+		}
 	}
 }

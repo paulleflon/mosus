@@ -50,13 +50,23 @@
 		"description": "이 서버의 스코버이드를 보기"
 	},
 	"game": {
-		"name": "partie",
-		"description": "Bilan d'une partie passée dans ce serveur",
+		"name": "게임",
+		"description": "게임에 대한 정보",
 		"options": {
 			"game": {
-				"label": "partie",
-				"description": "L'id de la partie"
+				"label": "게임",
+				"description": "게임의 id"
 			}
 		}
-	}
+	},
+		"games": {
+			"name": "게임-리스트",
+			"description": "이 서버의 게임들 리스트",
+			"options": {
+				"page": {
+					"label": "페이지",
+					"description": "리스트의 무슨 페이지"
+				}
+			}
+		}
 }

@@ -59,5 +59,15 @@
 				"description": "L'id de la partie"
 			}
 		}
+	},
+	"games": {
+		"name": "parties",
+		"description": "Liste des parties passées sur ce serveur",
+		"options": {
+			"page": {
+				"label": "page",
+				"description": "La page à consulter"
+			}
+		}
 	}
 }
