@@ -11,7 +11,7 @@ import { formatMessage } from './i18n';
  * @param l The number of players who didn't catch the sus.
  * @returns The amounf of points the sus will earn.
  */
-function getSusScore(w: number, l: number): number {
+export function getSusScore(w: number, l: number): number {
 	if (w === l)
 		return 0;
 	const maxValue = 5;

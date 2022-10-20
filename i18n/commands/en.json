@@ -48,5 +48,26 @@
 	"scoreboard": {
 		"name": "scoreboard",
 		"description": "Displays the scoreboard for this server"
+	},
+	"game": {
+		"name": "game",
+		"description": "Summary of a passed game in the server",
+		"options": {
+			"game": {
+				"label": "game",
+				"description": "id of the game"
+			}
+		}
+	},
+	"games": {
+		"name": "games",
+		"description": "List of passed games in the server",
+		"options": {
+			"page": {
+				"label": "page",
+				"comment": "For some reason, any decent description is rejected at registration. I really dislike working with Discord and discord.js damn",
+				"description": "The page to look up"
+			}
+		}
 	}
 }

@@ -49,5 +49,25 @@
 	"scoreboard": {
 		"name": "scores",
 		"description": "Affiche le tableau des scores du serveur"
+	},
+	"game": {
+		"name": "partie",
+		"description": "Bilan d'une partie passée dans ce serveur",
+		"options": {
+			"game": {
+				"label": "partie",
+				"description": "L'id de la partie"
+			}
+		}
+	},
+	"games": {
+		"name": "parties",
+		"description": "Liste des parties passées sur ce serveur",
+		"options": {
+			"page": {
+				"label": "page",
+				"description": "La page à consulter"
+			}
+		}
 	}
 }
