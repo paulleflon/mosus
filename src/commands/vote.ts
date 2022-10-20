@@ -7,7 +7,6 @@ import SavedGuild from '../types/SavedGuild';
 import SavedVote from '../types/SavedVotes';
 
 const data = new LocalizedSlashCommandBuilder('vote')
-	.setDMPermission(false)
 	.addLocalizedOption(
 		'sus',
 		new SlashCommandUserOption()

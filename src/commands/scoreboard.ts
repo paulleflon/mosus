@@ -4,8 +4,7 @@ import Command from '../base/Command';
 import { formatMessage, LocalizedSlashCommandBuilder } from '../lib/i18n';
 import SavedGuild from '../types/SavedGuild';
 
-const data = new LocalizedSlashCommandBuilder('scoreboard')
-	.setDMPermission(false);
+const data = new LocalizedSlashCommandBuilder('scoreboard');
 export default class extends Command {
 	constructor(client: Client) {
 		super(client, 'scoreboard', false, data.toJSON());

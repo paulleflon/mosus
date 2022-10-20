@@ -6,7 +6,6 @@ import { AvailableLanguage } from '../types/AvailableLanguages';
 import SavedGuild from '../types/SavedGuild';
 
 const data = new LocalizedSlashCommandBuilder('set-language')
-	.setDMPermission(false)
 	.addLocalizedOption(
 		'language',
 		new SlashCommandStringOption()

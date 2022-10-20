@@ -6,7 +6,6 @@ import { formatMessage, LocalizedSlashCommandBuilder } from '../lib/i18n';
 import SavedGuild from '../types/SavedGuild';
 
 const data = new LocalizedSlashCommandBuilder('game')
-	.setDMPermission(false)
 	.addLocalizedOption(
 		'game',
 		new SlashCommandNumberOption()

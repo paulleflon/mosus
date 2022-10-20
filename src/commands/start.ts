@@ -5,8 +5,7 @@ import getWord from '../lib/getWord';
 import { formatMessage, LocalizedSlashCommandBuilder } from '../lib/i18n';
 import SavedGuild from '../types/SavedGuild';
 
-const data = new LocalizedSlashCommandBuilder('start')
-	.setDMPermission(false);
+const data = new LocalizedSlashCommandBuilder('start');
 export default class extends Command {
 	constructor(client: Client) {
 		super(client, 'start', true, data.toJSON());

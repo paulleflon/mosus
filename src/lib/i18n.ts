@@ -78,6 +78,7 @@ export class LocalizedSlashCommandBuilder extends SlashCommandBuilder {
 		const en = require(`../../i18n/commands/en.json`)[name];
 		this.setName(en.name);
 		this.setDescription(en.description);
+		this.setDMPermission(false);
 		for (const language of AvailableLanguages) {
 			// English is the default language, this loop is only for the other languages.
 			if (language === 'en') continue;

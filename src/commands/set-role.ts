@@ -5,7 +5,6 @@ import { formatMessage, LocalizedSlashCommandBuilder } from '../lib/i18n';
 import SavedGuild from '../types/SavedGuild';
 
 const data = new LocalizedSlashCommandBuilder('set-role')
-	.setDMPermission(false)
 	.addLocalizedOption(
 		'role',
 		new SlashCommandRoleOption()
