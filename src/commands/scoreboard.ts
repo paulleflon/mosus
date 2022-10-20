@@ -24,9 +24,9 @@ export default class extends Command {
 		let rank = 1;
 		for (const [id, score] of entries) {
 			scoreString += `${formatMessage('scoreboard.row', save.language, {
-				rank: `${rank++}`,
+				rank: rank++,
 				user: `<@${id}>`,
-				points: `${score}`
+				points: score
 			})}\n`;
 		}
 		const embed = new EmbedBuilder()

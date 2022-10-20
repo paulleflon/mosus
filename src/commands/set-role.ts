@@ -23,7 +23,7 @@ export default class extends Command {
 		const role = interaction.options.getRole('role', true);
 		this.client.db.setGuildRole(guild.id, role.id);
 		interaction.reply({
-			content: formatMessage('ephemeral.roleSet', interaction.locale, { role: `${role}` }),
+			content: formatMessage('ephemeral.roleSet', interaction.locale, { role }),
 			ephemeral: true
 		});
 	}

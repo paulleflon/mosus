@@ -64,9 +64,9 @@ export default class extends Command {
 		channel.send(
 			formatMessage('announcements.voted', save.language,
 				{
-					mention: interaction.user.toString(),
-					voteCount: voteCount.toString(),
-					playerCount: playerCount.toString()
+					mention: interaction.user,
+					voteCount, 
+					playerCount
 				}
 			)
 		);

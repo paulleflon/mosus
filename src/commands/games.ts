@@ -36,7 +36,7 @@ export default class extends Command {
 			.setTitle(formatMessage('games.embed.title', save.language, { guild: guild.name }))
 			.setDescription(description)
 			.setColor('#2F3136')
-			.setFooter({ text: formatMessage('games.embed.footer', save.language, { pages: pages.toString(), page: page.toString() }) });
+			.setFooter({ text: formatMessage('games.embed.footer', save.language, { pages, page }) });
 		interaction.reply({ embeds: [embed] });
 	}
 }

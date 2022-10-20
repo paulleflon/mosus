@@ -30,12 +30,12 @@ export default class extends Command {
 		await guild.members.fetch();
 		if (role.members.size < 3)
 			return void interaction.reply({
-				content: formatMessage('ephemeral.notEnoughPlayers', interaction.locale, { role: role.toString() }),
+				content: formatMessage('ephemeral.notEnoughPlayers', interaction.locale, { role }),
 				ephemeral: true
 			});
 		if (role.members.size > 15)
 			return void interaction.reply({
-				content: formatMessage('ephemeral.tooManyPlayers', interaction.locale, { role: role.toString() }),
+				content: formatMessage('ephemeral.tooManyPlayers', interaction.locale, { role }),
 				ephemeral: true
 			});
 		// This reply is deferred as the process of sending DMs to every player can take some time.
@@ -74,8 +74,8 @@ export default class extends Command {
 		interaction.channel!.send({
 			allowedMentions: { roles: [role.id] },
 			content: formatMessage('announcements.gameLaunch', save.language, {
-				mention: role.toString(),
-				id: `${id}` // number -> string
+				mention: role,
+				id
 			})
 		});
 	}

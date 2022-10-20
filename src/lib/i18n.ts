@@ -7,7 +7,7 @@ import { AvailableLanguage, AvailableLanguages } from '../types/AvailableLanguag
  * @param values The dynamic values to insert in the string
  * @returns The formatted message
  */
-export function formatMessage(id: string, locale: LocaleString | 'en', values: Record<string, string> = {}): string {
+export function formatMessage(id: string, locale: LocaleString | 'en', values: Record<string, any> = {}): string {
 	// In the bot, no difference is made between british and american english.
 	// In case of unavailable locale from the user, we fallback to english.
 	// That's why we need locale's type to accept 'en' as well.
@@ -52,7 +52,7 @@ export function formatMessage(id: string, locale: LocaleString | 'en', values: R
 		// If this dynamic value is not provided in the function call, 
 		// it is let as is in the returned string.
 		if (value) {
-			template = template.replace(match[1], values[key]);
+			template = template.replace(match[1], `${values[key]}`);
 			// As the matched pattern is being replaced in the string,
 			// The regex index must be reset in order to keep matching
 			// The next bracket values.
