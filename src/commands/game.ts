@@ -1,8 +1,9 @@
-import { ChatInputCommandInteraction, EmbedBuilder, SlashCommandNumberOption, SlashCommandRoleOption } from 'discord.js';
+import { ChatInputCommandInteraction, EmbedBuilder, Guild, SlashCommandNumberOption, SlashCommandRoleOption } from 'discord.js';
 import Client from '../base/Client';
 import Command from '../base/Command';
 import { getSusScore } from '../lib/endGame';
 import { formatMessage, LocalizedSlashCommandBuilder } from '../lib/i18n';
+import SavedGuild from '../types/SavedGuild';
 
 const data = new LocalizedSlashCommandBuilder('game')
 	.setDMPermission(false)
@@ -17,11 +18,10 @@ export default class extends Command {
 		super(client, 'game', false, data.toJSON());
 	}
 
-	public async execute(interaction: ChatInputCommandInteraction): Promise<void> {
+	public async execute(interaction: ChatInputCommandInteraction, guild: Guild, save: SavedGuild): Promise<void> {
 		const id = interaction.options.getNumber('game', true);
 		const game = await this.client.db.getGame(id);
-		const guild = interaction.guild!;
-		const { language } = (await this.client.db.getGuild(guild.id))!;
+		const { language } = save;
 		if (!game)
 			return void interaction.reply({
 				content: formatMessage('ephemeral.unknownGame', interaction.locale),
@@ -67,7 +67,7 @@ export default class extends Command {
 		} catch (_) { /* This is fine. */ }
 		const embed = new EmbedBuilder()
 			.setAuthor(host ? {
-				name: formatMessage('game.embed.host', language, {host: host.username}),
+				name: formatMessage('game.embed.host', language, { host: host.username }),
 				iconURL: host.displayAvatarURL()
 			} : null)
 			.setThumbnail(sus ? sus.displayAvatarURL() : null)
@@ -77,7 +77,7 @@ export default class extends Command {
 				{
 					name: formatMessage('game.embed.sus', language),
 					value: `<@${game.sus}> **${displaySusEarned}**`,
-						inline: true
+					inline: true
 				},
 				{
 					name: formatMessage('game.embed.word', language),
@@ -86,7 +86,7 @@ export default class extends Command {
 				},
 				{
 					name: formatMessage('game.embed.placed', language),
-					value: game.link ? formatMessage('game.embed.placedLocation', language, {link: game.link}) : formatMessage('game.embed.nowhere', language),
+					value: game.link ? formatMessage('game.embed.placedLocation', language, { link: game.link }) : formatMessage('game.embed.nowhere', language),
 					inline: true
 				}
 			])

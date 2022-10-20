@@ -1,7 +1,8 @@
-import { ChatInputCommandInteraction, EmbedBuilder } from 'discord.js';
+import { ChatInputCommandInteraction, EmbedBuilder, Guild } from 'discord.js';
 import Client from '../base/Client';
 import Command from '../base/Command';
 import { formatMessage, LocalizedSlashCommandBuilder } from '../lib/i18n';
+import SavedGuild from '../types/SavedGuild';
 
 const data = new LocalizedSlashCommandBuilder('scoreboard')
 	.setDMPermission(false);
@@ -10,8 +11,7 @@ export default class extends Command {
 		super(client, 'scoreboard', false, data.toJSON());
 	}
 
-	public async execute(interaction: ChatInputCommandInteraction) {
-		const save = (await this.client.db.getGuild(interaction.guild!.id))!;
+	public async execute(interaction: ChatInputCommandInteraction, guild: Guild, save: SavedGuild) {
 		const scores = await this.client.db.getScores(save.id);
 		if (Object.keys(scores).length === 0)
 			return void interaction.reply({

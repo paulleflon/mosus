@@ -1,7 +1,8 @@
-import { CacheType, CommandInteraction, SlashCommandBuilder } from 'discord.js';
+import { CacheType, CommandInteraction, Guild, SlashCommandBuilder } from 'discord.js';
 import Client from '../base/Client';
 import Command from '../base/Command';
 import { formatMessage, LocalizedSlashCommandBuilder } from '../lib/i18n';
+import SavedGuild from '../types/SavedGuild';
 
 const data = new LocalizedSlashCommandBuilder('open-votes')
 	.setDMPermission(false);
@@ -10,9 +11,7 @@ export default class extends Command {
 		super(client, 'open-votes', true, data.toJSON());
 	}
 
-	public async execute(interaction: CommandInteraction<CacheType>): Promise<void> {
-		const guild = interaction.guild!;
-		const save = (await this.client.db.getGuild(guild.id))!;
+	public async execute(interaction: CommandInteraction<CacheType>, guild: Guild, save: SavedGuild): Promise<void> {
 		const game = await this.client.db.getGame(save.game || -1);
 		if (!game)
 			return void interaction.reply({

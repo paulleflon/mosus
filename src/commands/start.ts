@@ -1,4 +1,4 @@
-import { ChatInputCommandInteraction, SlashCommandBuilder } from 'discord.js';
+import { ChatInputCommandInteraction, Guild, SlashCommandBuilder } from 'discord.js';
 import Client from '../base/Client';
 import Command from '../base/Command';
 import getWord from '../lib/getWord';
@@ -12,13 +12,10 @@ export default class extends Command {
 		super(client, 'start', true, data.toJSON());
 	}
 
-	public async execute(interaction: ChatInputCommandInteraction) {
+	public async execute(interaction: ChatInputCommandInteraction, guild: Guild, save: SavedGuild) {
 		// Only members with `Manage Messages` permission can start a game in a guild.
 		if (!interaction.memberPermissions || !interaction.memberPermissions.has('ManageMessages'))
 			return void interaction.reply({ content: formatMessage('ephemeral.missingPermission', 'fr'), ephemeral: true });
-		// This interaction can't be triggered from DMs. Therefore, interaction.guild is always defined.
-		const guild = interaction.guild!;
-		const save = await this.client.db.getGuild(guild.id) as SavedGuild;
 		// Not using just save.game as the id could be 0.
 		if (typeof save.game === 'number')
 			return void interaction.reply({

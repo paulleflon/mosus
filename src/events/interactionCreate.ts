@@ -55,6 +55,9 @@ export default class extends Event {
 					ephemeral: true
 				});
 		}
-		command.execute(interaction);
+		// The bot is never enabled in DMs. Hence `interaction.guild` is necessarly not null.
+		const guild = interaction.guild!;
+		const save = await this.client.db.getGuild(guild.id);
+		command.execute(interaction, guild, save);
 	}
 }

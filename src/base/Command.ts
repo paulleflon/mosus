@@ -1,5 +1,6 @@
 import { RESTPostAPIApplicationCommandsJSONBody } from 'discord-api-types/v10';
-import { CommandInteraction } from 'discord.js';
+import { CommandInteraction, Guild } from 'discord.js';
+import SavedGuild from '../types/SavedGuild';
 import Client from './Client';
 import Logger from './Logger';
 
@@ -37,6 +38,8 @@ export default abstract class Command {
 	/**
 	 * The function to execute when the command is used.
 	 * @param interaction The interaction that triggered the command.
+	 * @param guild The guild in which the interaction was triggered.
+	 * @param save The saved data about the guild (e.g. preferred language).
 	 */
-	public abstract execute(interaction: CommandInteraction): void;
+	public abstract execute(interaction: CommandInteraction, guild: Guild, save: SavedGuild): void;
 }

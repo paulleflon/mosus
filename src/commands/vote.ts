@@ -1,8 +1,9 @@
-import { ChatInputCommandInteraction, SlashCommandStringOption, SlashCommandUserOption, TextChannel } from 'discord.js';
+import { ChatInputCommandInteraction, Guild, SlashCommandStringOption, SlashCommandUserOption, TextChannel } from 'discord.js';
 import Client from '../base/Client';
 import Command from '../base/Command';
 import endGame from '../lib/endGame';
 import { formatMessage, LocalizedSlashCommandBuilder } from '../lib/i18n';
+import SavedGuild from '../types/SavedGuild';
 import SavedVote from '../types/SavedVotes';
 
 const data = new LocalizedSlashCommandBuilder('vote')
@@ -18,9 +19,7 @@ export default class extends Command {
 		super(client, 'vote', false, data.toJSON());
 	}
 
-	public async execute(interaction: ChatInputCommandInteraction): Promise<void> {
-		const guild = interaction.guild!;
-		const save = (await this.client.db.getGuild(guild.id))!;
+	public async execute(interaction: ChatInputCommandInteraction, guild: Guild, save: SavedGuild): Promise<void> {
 		const game = await this.client.db.getGame(save.game || -1);
 		if (!game)
 			return void interaction.reply({
