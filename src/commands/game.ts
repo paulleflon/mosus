@@ -21,6 +21,7 @@ export default class extends Command {
 		const id = interaction.options.getNumber('game', true);
 		const game = await this.client.db.getGame(id);
 		const guild = interaction.guild!;
+		const { language } = (await this.client.db.getGuild(guild.id))!;
 		if (!game)
 			return void interaction.reply({
 				content: formatMessage('ephemeral.unknownGame', interaction.locale),
@@ -38,7 +39,7 @@ export default class extends Command {
 			});
 
 		const votes = await this.client.db.getVotes(game.id);
-		let description = '**Votes**\n';
+		let description = formatMessage('game.embed.descriptionTitle', language) + '\n';
 		let w = 0;
 		let l = 0;
 		for (const [voter, { voted, word }] of Object.entries(votes)) {
@@ -66,26 +67,26 @@ export default class extends Command {
 		} catch (_) { /* This is fine. */ }
 		const embed = new EmbedBuilder()
 			.setAuthor(host ? {
-				name: `Hosted by ${host.username}`,
+				name: formatMessage('game.embed.host', language, {host: host.username}),
 				iconURL: host.displayAvatarURL()
 			} : null)
 			.setThumbnail(sus ? sus.displayAvatarURL() : null)
-			.setTitle(`Game #${game.id} ${game.status === 'cancelled' ? '[CANCELLED]' : ''}`)
+			.setTitle(`${formatMessage('game.embed.title', language, { id: id.toString() })} ${game.status === 'cancelled' ? formatMessage('game.embed.cancelled', language) : ''}`)
 			.setDescription(description)
 			.addFields([
 				{
-					name: 'Sus',
+					name: formatMessage('game.embed.sus', language),
 					value: `<@${game.sus}> **${displaySusEarned}**`,
-					inline: true
+						inline: true
 				},
 				{
-					name: 'Word',
+					name: formatMessage('game.embed.word', language),
 					value: `**\`${game.word}\`**`,
 					inline: true
 				},
 				{
-					name: 'Placed',
-					value: game.link ? `[here](${game.link})` : '*Nowhere*',
+					name: formatMessage('game.embed.placed', language),
+					value: game.link ? formatMessage('game.embed.placedLocation', language, {link: game.link}) : formatMessage('game.embed.nowhere', language),
 					inline: true
 				}
 			])

@@ -46,6 +46,19 @@
 		"title": "Scoreboard",
 		"row": "**{rank}.** {user} - **{points}** points"
 	},
+	"game": {
+		"embed": {
+			"descriptionTitle": "**Votes**",
+			"host": "Hosted by {host}",
+			"title": "Game #{id}",
+			"cancelled": "[CANCELLED]",
+			"sus": "Sus",
+			"word": "Word",
+			"placed": "Placed",
+			"placedLocation": "[here]({link})",
+			"nowhere": "*Nowhere*"
+		}
+	},
 	"games": {
 		"embed": {
 			"descriptionRow": "**#{id}** - `{word}`",

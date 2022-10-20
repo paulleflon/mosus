@@ -47,6 +47,19 @@
 		"title": "Tableau des scores",
 		"row": "**{rank}.** {user} - **{points}** points"
 	},
+	"game": {
+		"embed": {
+			"descriptionTitle": "**Votes**",
+			"host": "Hôte : {host}",
+			"title": "Partie #{id}",
+			"cancelled": "[ANNULÉE]",
+			"sus": "Sus",
+			"word": "Mot",
+			"placed": "Placé",
+			"placedLocation": "[ici]({link})",
+			"nowhere": "*Nulle part*"
+		}
+	},
 	"games": {
 		"embed": {
 			"descriptionRow": "**#{id}** - `{word}`",

@@ -46,6 +46,19 @@
 		"title": "스코어보드",
 		"row": "**{rank}.** {user} - **{points}**점"
 	},
+	"game": {
+		"embed": {
+			"descriptionTitle": "**투표**",
+			"host": "진행자: {host}",
+			"title": "게임 #{id}",
+			"cancelled": "[취소함]",
+			"sus": "sus님",
+			"word": "단어",
+			"placed": "어디",
+			"placedLocation": "[여기]({link})",
+			"nowhere": "*없음*"
+		}
+	},
 	"games": {
 		"embed": {
 			"descriptionRow": "**#{id}** - `{word}`",
