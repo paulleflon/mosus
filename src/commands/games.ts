@@ -25,8 +25,9 @@ export default class extends Command {
 		const pages = Math.ceil(count / 10);
 		if (page > pages)
 			page = 1;
+		const query = 'SELECT id, word, status FROM Games WHERE guild = ? AND status = \'ended\' OR  status = \'cancelled\' ORDER BY id DESC ';
 		const limit = `LIMIT ${(page - 1) * 10}, 10`;
-		const [games] = count === 0 ? [] : await this.client.db.query('SELECT id, word FROM Games WHERE guild = ? ORDER BY id ' + limit, [guild.id]) as any[];
+		const [games] = count === 0 ? [] : await this.client.db.query(query + limit, [guild.id]) as any[];
 
 		let description = count === 0 ? formatMessage('games.embed.noGame', save.language) : '';
 		for (const { id, word } of games) {
