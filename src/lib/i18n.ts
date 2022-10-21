@@ -51,7 +51,7 @@ export function formatMessage(id: string, locale: LocaleString | 'en', values: R
 		const value = values[key];
 		// If this dynamic value is not provided in the function call, 
 		// it is let as is in the returned string.
-		if (value) {
+		if (typeof value !== 'undefined' && value !== null) {
 			template = template.replace(match[1], `${values[key]}`);
 			// As the matched pattern is being replaced in the string,
 			// The regex index must be reset in order to keep matching
