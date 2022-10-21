@@ -130,12 +130,17 @@ export default class Database implements DatabaseParams {
 	 * @param id The id of the guild
 	 * @returns The saved data about the guild if it is found.
 	 */
-	async getGuild(id: Snowflake): Promise<SavedGuild | null> {
+	async getGuild(id: Snowflake): Promise<SavedGuild> {
 		if (this.#guildCache.has(id))
 			return this.#guildCache.get(id)!;
 		const [rows] = await this.query('SELECT * FROM Guilds WHERE id = ?', [id]) as any[];
+		// I don't see how this could happen in usual bot usage, but just so that we aren't bothered
+		// by non-null checks all the time.
 		if (!rows.length)
-			return null;
+			return {
+				id: '123456789123456789',
+				language: 'en',
+			};
 		const guild = rows[0] as SavedGuild;
 		this.#guildCache.set(id, guild);
 		return guild;

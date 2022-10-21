@@ -1,24 +1,20 @@
-import { ChatInputCommandInteraction, SlashCommandBuilder } from 'discord.js';
+import { ChatInputCommandInteraction, Guild, SlashCommandBuilder } from 'discord.js';
 import Client from '../base/Client';
 import Command from '../base/Command';
 import getWord from '../lib/getWord';
 import { formatMessage, LocalizedSlashCommandBuilder } from '../lib/i18n';
 import SavedGuild from '../types/SavedGuild';
 
-const data = new LocalizedSlashCommandBuilder('start')
-	.setDMPermission(false);
+const data = new LocalizedSlashCommandBuilder('start');
 export default class extends Command {
 	constructor(client: Client) {
 		super(client, 'start', true, data.toJSON());
 	}
 
-	public async execute(interaction: ChatInputCommandInteraction) {
+	public async execute(interaction: ChatInputCommandInteraction, guild: Guild, save: SavedGuild) {
 		// Only members with `Manage Messages` permission can start a game in a guild.
 		if (!interaction.memberPermissions || !interaction.memberPermissions.has('ManageMessages'))
 			return void interaction.reply({ content: formatMessage('ephemeral.missingPermission', 'fr'), ephemeral: true });
-		// This interaction can't be triggered from DMs. Therefore, interaction.guild is always defined.
-		const guild = interaction.guild!;
-		const save = await this.client.db.getGuild(guild.id) as SavedGuild;
 		// Not using just save.game as the id could be 0.
 		if (typeof save.game === 'number')
 			return void interaction.reply({
@@ -33,12 +29,12 @@ export default class extends Command {
 		await guild.members.fetch();
 		if (role.members.size < 3)
 			return void interaction.reply({
-				content: formatMessage('ephemeral.notEnoughPlayers', interaction.locale, { role: role.toString() }),
+				content: formatMessage('ephemeral.notEnoughPlayers', interaction.locale, { role }),
 				ephemeral: true
 			});
 		if (role.members.size > 15)
 			return void interaction.reply({
-				content: formatMessage('ephemeral.tooManyPlayers', interaction.locale, { role: role.toString() }),
+				content: formatMessage('ephemeral.tooManyPlayers', interaction.locale, { role }),
 				ephemeral: true
 			});
 		// This reply is deferred as the process of sending DMs to every player can take some time.
@@ -77,8 +73,8 @@ export default class extends Command {
 		interaction.channel!.send({
 			allowedMentions: { roles: [role.id] },
 			content: formatMessage('announcements.gameLaunch', save.language, {
-				mention: role.toString(),
-				id: `${id}` // number -> string
+				mention: role,
+				id
 			})
 		});
 	}

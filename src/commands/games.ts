@@ -1,11 +1,11 @@
-import { ChatInputCommandInteraction, EmbedBuilder, SlashCommandNumberOption, SlashCommandRoleOption } from 'discord.js';
+import { ChatInputCommandInteraction, EmbedBuilder, Guild, SlashCommandNumberOption, SlashCommandRoleOption } from 'discord.js';
 import Client from '../base/Client';
 import Command from '../base/Command';
 import { getSusScore } from '../lib/endGame';
 import { formatMessage, LocalizedSlashCommandBuilder } from '../lib/i18n';
+import SavedGuild from '../types/SavedGuild';
 
 const data = new LocalizedSlashCommandBuilder('games')
-	.setDMPermission(false)
 	.addLocalizedOption(
 		'page',
 		new SlashCommandNumberOption()
@@ -16,10 +16,8 @@ export default class extends Command {
 		super(client, 'games', false, data.toJSON());
 	}
 
-	public async execute(interaction: ChatInputCommandInteraction): Promise<void> {
+	public async execute(interaction: ChatInputCommandInteraction, guild: Guild, save: SavedGuild): Promise<void> {
 		let page = interaction.options.getNumber('page', false) || 1;
-		const guild = interaction.guild!;
-		const save = (await this.client.db.getGuild(guild.id))!;
 		const [[rows]] = await this.client.db.query('SELECT COUNT(*) FROM Games WHERE guild = ?', [guild.id]) as any[];
 		const count = rows['COUNT(*)'];
 		const pages = Math.ceil(count / 10);
@@ -37,7 +35,7 @@ export default class extends Command {
 			.setTitle(formatMessage('games.embed.title', save.language, { guild: guild.name }))
 			.setDescription(description)
 			.setColor('#2F3136')
-			.setFooter({ text: formatMessage('games.embed.footer', save.language, { pages: pages.toString(), page: page.toString() }) });
+			.setFooter({ text: formatMessage('games.embed.footer', save.language, { pages, page }) });
 		interaction.reply({ embeds: [embed] });
 	}
 }

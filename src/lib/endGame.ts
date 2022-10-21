@@ -78,7 +78,7 @@ export default async function endGame(client: Client, guild: SavedGuild, game: S
 	for (const [id, amount] of entries) {
 		earningsMessage += formatMessage('announcements.pointsEarned', guild.language, {
 			mention: `<@${id}>`,
-			amount: amount.toString()
+			amount
 		}) + '\n';
 	}
 	await channel.send(formatMessage('announcements.voteEnd', guild.language, { mention: `<@&${guild.role!}>` }));

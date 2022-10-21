@@ -1,17 +1,16 @@
-import { ChatInputCommandInteraction, EmbedBuilder } from 'discord.js';
+import { ChatInputCommandInteraction, EmbedBuilder, Guild } from 'discord.js';
 import Client from '../base/Client';
 import Command from '../base/Command';
 import { formatMessage, LocalizedSlashCommandBuilder } from '../lib/i18n';
+import SavedGuild from '../types/SavedGuild';
 
-const data = new LocalizedSlashCommandBuilder('scoreboard')
-	.setDMPermission(false);
+const data = new LocalizedSlashCommandBuilder('scoreboard');
 export default class extends Command {
 	constructor(client: Client) {
 		super(client, 'scoreboard', false, data.toJSON());
 	}
 
-	public async execute(interaction: ChatInputCommandInteraction) {
-		const save = (await this.client.db.getGuild(interaction.guild!.id))!;
+	public async execute(interaction: ChatInputCommandInteraction, guild: Guild, save: SavedGuild) {
 		const scores = await this.client.db.getScores(save.id);
 		if (Object.keys(scores).length === 0)
 			return void interaction.reply({
@@ -24,9 +23,9 @@ export default class extends Command {
 		let rank = 1;
 		for (const [id, score] of entries) {
 			scoreString += `${formatMessage('scoreboard.row', save.language, {
-				rank: `${rank++}`,
+				rank: rank++,
 				user: `<@${id}>`,
-				points: `${score}`
+				points: score
 			})}\n`;
 		}
 		const embed = new EmbedBuilder()
