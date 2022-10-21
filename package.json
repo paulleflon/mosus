@@ -17,7 +17,7 @@
     "update": "git reset HEAD --hard && git pull && yarn install && pm2 stop 'mosus' && yarn register && yarn prod"
   },
   "name": "mosus",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "main": "build/app.js",
   "repository": "https://github.com/hickatheworld/mosus.git",
   "author": "Hicka",
