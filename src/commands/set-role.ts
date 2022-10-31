@@ -1,4 +1,4 @@
-import { ChatInputCommandInteraction, Guild, SlashCommandRoleOption } from 'discord.js';
+import { ChatInputCommandInteraction, Guild, SlashCommandRoleOption, Role } from 'discord.js';
 import Client from '../base/Client';
 import Command from '../base/Command';
 import { formatMessage, LocalizedSlashCommandBuilder } from '../lib/i18n';
@@ -18,8 +18,10 @@ export default class extends Command {
 	public execute(interaction: ChatInputCommandInteraction, guild: Guild, save: SavedGuild): void {
 		// Only members with the `Manage Messages` permission can change the mosus settings in a guild.
 		if (!interaction.memberPermissions || !interaction.memberPermissions.has('ManageMessages'))
-			return void interaction.reply({ content: formatMessage('ephemeral.missingPermission', 'fr'), ephemeral: true });
-		const role = interaction.options.getRole('role', true);
+			return void interaction.reply({ content: formatMessage('ephemeral.missingPermission', interaction.locale), ephemeral: true });
+		const role = interaction.options.getRole('role', true) as Role;
+		if (!role.editable)
+			return void interaction.reply({ content: formatMessage('ephemeral.cantEditRole', interaction.locale), ephemeral: true });
 		this.client.db.setGuildRole(guild.id, role.id);
 		interaction.reply({
 			content: formatMessage('ephemeral.roleSet', interaction.locale, { role }),

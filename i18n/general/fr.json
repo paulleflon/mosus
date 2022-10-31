@@ -41,7 +41,13 @@
 		"noScores": "Personne n'a encore marqué de point dans ce serveur.",
 		"unknownGame": "Partie non trouvée.",
 		"forbiddenGame": "Vous n'avez pas accès aux informations de cette partie.",
-		"gameNotFinished": "Cette partie n'est pas encore terminée."
+		"gameNotFinished": "Cette partie n'est pas encore terminée.",
+		"alreadyHasRole": "Vous êtes déjà un joueur de mosus !",
+		"couldntGiveRole": "Une erreur est survenue et le rôle n'a pas pu vous être donné",
+		"addedRole": "Vous avez désormais le rôle {role} ! Ne soyez pas trop sus...",
+		"doesntHaveRole": "Vous n'êtes pas un joueur de mosus.",
+		"couldntRemoveRole": "Une erreur est survenue et le rôle n'a pas pu vous être retiré",
+		"removedRole": "Vous n'êtes plus un joueur de mosus"
 	},
 	"scoreboard": {
 		"title": "Tableau des scores",

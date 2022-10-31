@@ -40,7 +40,13 @@
 		"noScores": "아직 아무도 점수를 받았지 않습니다.",
 		"unknownGame": "그 게임을 찾을 수 없습니다",
 		"forbiddenGame": "그 게임에 대한 정보를 볼 수 없습니다.",
-		"gameNotFinished": "그 게임이 끝나지 않습니다."
+		"gameNotFinished": "그 게임이 끝나지 않습니다.",
+		"alreadyHasRole": "본인은 mosus 역할이 있습니다.",
+		"couldntGiveRole": "mosus 역할을 줄 수 없습니다.",
+		"addedRole": "본인은 {mosus} 역할을 받았습니다!",
+		"doesntHaveRole": "본인은 mosus 역할이 없습니다.",
+		"couldntRemoveRole": "본인에서 mosus 역할을 치울 수 없습니다.",
+		"removedRole": "본인은 더 이상 mosus 역할이 없습니다."
 	},
 	"scoreboard": {
 		"title": "스코어보드",
