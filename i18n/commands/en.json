@@ -69,5 +69,13 @@
 				"description": "The page to look up"
 			}
 		}
+	},
+	"join": {
+		"name": "join",
+		"description": "Gives you the mosus player role"
+	},
+	"leave": {
+		"name": "leave",
+		"description": "Takes the mosus player role away from you"
 	}
 }

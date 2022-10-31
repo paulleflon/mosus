@@ -69,5 +69,13 @@
 				"description": "La page à consulter"
 			}
 		}
+	},
+	"join": {
+		"name": "jouer",
+		"description": "Vous donne le rôle de joueur mosus"
+	},
+	"leave": {
+		"name": "quitter",
+		"description": "Vous retire le rôle de joueur mosus"
 	}
 }

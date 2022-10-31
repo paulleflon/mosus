@@ -68,5 +68,13 @@
 					"description": "리스트의 무슨 페이지"
 				}
 			}
+		},
+		"join": {
+			"name": "놀기",
+			"description": "mosus 참가자 역할을 받기"
+		},
+		"leave": {
+			"name": "떠나기",
+			"description": "mosus을 놀이를 그만두기"
 		}
 }

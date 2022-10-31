@@ -40,7 +40,13 @@
 		"noScores": "No one has ever earned any point in this server so far.",
 		"unknownGame": "This game was not found.",
 		"forbiddenGame": "You can't access data about this game.",
-		"gameNotFinished": "This game has not finished yet."
+		"gameNotFinished": "This game has not finished yet.",
+		"alreadyHasRole": "You're already a player!",
+		"couldntGiveRole": "An error occured when trying to give you the mosus player role.",
+		"addedRole": "You now have the {role} role! Don't be too sus...",
+		"doesntHaveRole": "You are not a mosus player.",
+		"couldntRemoveRole": "An error occured when trying to remove the mosus player role from you.",
+		"removedRole": "You are no longer a mosus player!"
 	},
 	"scoreboard": {
 		"title": "Scoreboard",
