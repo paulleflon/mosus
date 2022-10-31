@@ -76,5 +76,9 @@
 		"leave": {
 			"name": "떠나기",
 			"description": "mosus을 놀이를 그만두기"
+		},
+		"close-votes": {
+			"name": "투표-끝",
+			"description": "투표 단계를 끝나기"
 		}
 }
