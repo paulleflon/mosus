@@ -81,5 +81,9 @@
 	"close-votes": {
 		"name": "close-votes",
 		"description": "Closes the vote phase prematurely"
+	},
+	"remaining-votes": {
+		"name": "remaining-votes",
+		"description": "Lists the players who haven't voted yet"
 	}
 }

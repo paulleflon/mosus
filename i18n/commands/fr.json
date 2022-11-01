@@ -81,5 +81,9 @@
 	"close-votes": {
 		"name": "fermer-votes",
 		"description": "Met prématurément fin à la phase de vote"
-	}
+	},
+		"remaining-votes": {
+			"name": "votes-restants",
+			"description": "Liste des joueurs n'ayant pas encore voté"
+		}
 }

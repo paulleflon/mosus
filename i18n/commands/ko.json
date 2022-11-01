@@ -59,26 +59,30 @@
 			}
 		}
 	},
-		"games": {
-			"name": "게임-리스트",
-			"description": "이 서버의 게임들 리스트",
-			"options": {
-				"page": {
-					"label": "페이지",
-					"description": "리스트의 무슨 페이지"
-				}
+	"games": {
+		"name": "게임-리스트",
+		"description": "이 서버의 게임들 리스트",
+		"options": {
+			"page": {
+				"label": "페이지",
+				"description": "리스트의 무슨 페이지"
 			}
-		},
-		"join": {
-			"name": "놀기",
-			"description": "mosus 참가자 역할을 받기"
-		},
-		"leave": {
-			"name": "떠나기",
-			"description": "mosus을 놀이를 그만두기"
-		},
-		"close-votes": {
-			"name": "투표-끝",
-			"description": "투표 단계를 끝나기"
 		}
+	},
+	"join": {
+		"name": "놀기",
+		"description": "mosus 참가자 역할을 받기"
+	},
+	"leave": {
+		"name": "떠나기",
+		"description": "mosus을 놀이를 그만두기"
+	},
+	"close-votes": {
+		"name": "투표-끝",
+		"description": "투표 단계를 끝나기"
+	},
+	"remaining-votes": {
+		"name": "남은-투표",
+		"description": "아직 투표하지 않은 플레이어"
+	}
 }
